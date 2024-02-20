@@ -71,9 +71,9 @@ Your menu should look like this:
 
 ```bash
 == Welcome to Code Platoon Video! ==
-1. View store video inventory
-2. View customer rented videos
-3. Add new customer
+x1. View store video inventory
+x2. View customer rented videos
+x3. Add new customer
 4. Rent video
 5. Return video
 6. Exit
