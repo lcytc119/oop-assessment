@@ -1,4 +1,5 @@
 # Write your Store Class here
+# Write your Store Class here
 """
 2. video inventory:
         x- video id
@@ -10,6 +11,10 @@
 """
 import csv
 
+from classes.customer import Customer
+from classes.video import Video
+
+from classes.customer_types import Customer_pf, Customer_sf, Customer_sx
 
 class Store:
     all_inventory_lst=[]
@@ -47,3 +52,37 @@ class Store:
                 return ele
                 
         return None
+    
+    def load_data(self, fname):
+        # filePath = __file__
+        with open("./data/"+fname+".csv", mode="r", newline="") as cvsFile:
+            reader = csv.reader(cvsFile, delimiter = ",")
+            res = []
+            for row in reader:
+                if row[0] == "id":
+                    continue
+                res.append(row)
+            setattr(self, fname, res)
+        if fname == "customers":
+            for data in self.customers:
+                c = Customer(data)
+        if fname == "inventory":
+            for data in self.inventory:
+                print("video: ", data)
+                inv = Video(data)
+                
+    def run_the_store(self):
+        # parse adifhad
+        return "Thank you, please come again!"
+        
+    def customer_type_maker(self, data):
+        ndata = list(data.values())
+        ndata = [ndata[0],ndata[3],ndata[1],ndata[2],""]
+        ty = data["account_type"]
+        match ty:
+            case "pf":
+                return Customer_pf(ndata)
+            case "sx":
+                return Customer_sx(ndata)
+            case "sf":
+                return Customer_sf(ndata)

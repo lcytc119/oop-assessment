@@ -1,20 +1,78 @@
 # Write you Customer Class here
-from classes.person import Person
+# class Customer:
+    # Write you Customer Class here
+# from classes.person import Person
 import csv
-class Customer(Person):
-    all_customers_lst=[]
+class Customer:
+    customers={}
+    
+    @staticmethod
+    def get_customer_by_id():
+        intp = input("please input a id: ")
+        return Customer.customers[int(intp)]
+    
+    @staticmethod
+    def create_customer():
+        lastid = len(Customer.customers)
+        intp = input("first name:")
+        fn = intp
+        intp = input("last name:")
+        ln = intp
+        intp = input("type:")
+        ty = intp
+        res = [lastid+1, ty, fn, ln, ""]
+        Customer(res)
+        return {
+            "id": lastid + 1,
+            "first_name": fn,
+            "last_name": ln,
+            "account_type": ty,
+        }
+        
+    @property
+    def return_a_video(self):
+        pass
+    @return_a_video.setter
+    def return_a_video(self, name):
+        self.current_video_rentals.remove(name)
 
-    def __init__(self, id=None, account_type=None, first_name=None, last_name=None, current_video_rentals=None) :
-        self.id = id
-        self.account_type = account_type
-        super().__init__(first_name, last_name)
-        if current_video_rentals == None:
+    @property
+    def rent_a_video(self):
+        pass
+    @rent_a_video.setter
+    def rent_a_video(self, value):
+        print(self.current_video_rentals)
+        if len(self.current_video_rentals) >= 3:
+            return
+        print("3")
+        if value[1] == "R" and  (not self.type.endswith("x")):
+            return 
+        print("r")
+        if self.type.startswith("s"):
+            print(len(self.current_video_rentals))
+            if len(self.current_video_rentals) >= 1:
+                return 
+        print("s")
+        self.current_video_rentals.append(value[0])
+        
+    def get_customer_rented_videos(self):
+        return f"{self.first_name} has the following rentals:\n{self.current_video_rentals}"
+
+    def __init__(self, data):
+        self.id = len(Customer.customers) + 1
+        self.nid = data[0]
+        self.type = data[1]
+        self.first_name = data[2]
+        self.lastN = data[3]
+        tmp = data[4].split("/")
+        if tmp == [""]:
             self.current_video_rentals = []
         else:
-            self.current_video_rentals = current_video_rentals
+            self.current_video_rentals = tmp
+        Customer.customers[int(self.id)] = self
         
-    def __repr__(self):
-        return f"id: {self.id} | account type: {self.account_type} | {super().__repr__()} | rental(s): {self.current_video_rentals}"
+    # def __repr__(self):
+    #     return f"id: {self.id} | account type: {self.account_type} | {super().__repr__()} | rental(s): {self.current_video_rentals}"
 
     @classmethod
     def all_customers(cls, path_to_file):
