@@ -171,9 +171,9 @@ class Test_Runner:
         # Asserting that the customer instance is of the expected class Customer_sx
         assert isinstance(customer, Customer_sx)
 
-    # def test_015_adding_a_customer_count(self):
-    #     print(Customer.customers.keys())
-    #     assert len(list(Customer.customers.keys())) == 8
+    def test_015_adding_a_customer_count(self):
+        print(Customer.customers.keys())
+        assert len(list(Customer.customers.keys())) == 8
 
 
 class Test_Renting_A_Video:
